@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
+
+import 'react-native-get-random-values';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+
+import Registration from "./Registration";
+
+
+const client = new ApolloClient({
+  uri: 'https://edoprovod.ru/graphql',
+  cache: new InMemoryCache()
+});
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    
+    <ApolloProvider client={client}>
+      <Registration/>
+    </ApolloProvider>
+
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
